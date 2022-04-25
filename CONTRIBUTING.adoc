@@ -1,0 +1,49 @@
+= Contributor Richtlinien
+
+Commit Messages::
+  Commit Messages sollten deskriptiv sein, und sie sollten nur **eine** Änderung umfassen.
+  Sollten mehrere Dinge geändert worden sein, so sind diese so in Commits aufzusplitten, dass sie nur eine Änderung beinhalten.
+
+Conding Style::
+  Es gelten folgende Regeln.
+Einrückungen::: Es sind pro Block 2 Leerzeichen einzurücken.
+[source,fortran]
+====
+program foo
+  implicit none
+  integer :: i,b,c
+  real    :: a
+
+  do i=1, 10
+    if (i.eq.5) then
+      write(*,*) i
+    else
+      cycle
+    end if
+  end do
+end program foo
+====
++
+Deklarationen::: Variablendeklarationen sind stets mit `::` zu schreiben.
+[source,fortran]
+====
+program foo
+  implicit none
+  integer :: i,b,c
+  real    :: a
+
+end program foo
+====
++
+In Subroutinen und Funktionen sind **Eingabeparameter** immer zuerst zu deklarieren.
+[source,fortran]
+====
+subroutine bar(foo,baz,foobar)
+  implicit none
+  integer, INTENT(in) :: foo
+  real, INTENT(in) :: baz
+  real, INTENT(out) :: foobar
+
+  ! Restliche Deklarationen und Code
+end subroutine bar
+====
