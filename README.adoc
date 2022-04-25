@@ -1,0 +1,4 @@
+= BIW3-01 Beleg
+
+In diesem Repository wird der Fortschritt meines Belegs getrackt.
+Ich übernehme weder Richtigkeit noch korrektheit der hier implementierten Algorithmen
