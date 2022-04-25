@@ -1,4 +1,50 @@
 = BIW3-01 Beleg
 
 In diesem Repository wird der Fortschritt meines Belegs getrackt.
-Ich übernehme weder Richtigkeit noch korrektheit der hier implementierten Algorithmen
+Ich übernehme weder Richtigkeit noch korrektheit der hier implementierten Algorithmen.
+
+== Aufbau des Programms
+
+Da ich nicht weiß wie man ordentlich ein Fortran Projekt aufbaut, habe ich willkürlich folgende Konventionen getroffen
+
+Es gibt folgenden Aufbau innerhalb des `root` Verzeichnisses
+
+.Struktur des Repositories
+====
+root
+|-- src
+    |-- subroutines
+    |-- util
+    |-- main.f90
+|-- build
+====
+
+Das `src` Verzeichnis beinhaltet alle Quelltextdateien, das `build` Verzeichnis beinhaltet alle Modules und auch die resultierende ausführbare Datei.
+
+== Befehl zum Kompilieren
+
+Es wird angenommen, dass `gfortran` auf dem `PATH` erreichbar ist.
+
+.Windows
+[source,dos]
+====
+gfortran src/main.f90 -o build/out.exe
+====
+
+bzw.
+
+.Unix-like Systeme
+[source,dos]
+====
+gfortran src/main.f90 -o build/out.out
+====
+
+== Code Stil
+
+Es werden 2 zentrale Prinzipien in diesem Repository eingehalten:
+
+DRY:: Dont. Repeat. Yourself
+Jegliche Unterprogramme und oder Funktionen müssen als solche ausgelagert werden. Es werden keine redundanten Algorithmen akzeptiert.
+
+RAII:: Resource Aquisition is Initialization.
+Dieses Prinzip ist damit eingehalten, dass jeder Programmabschnitt genau **eine** Verantwortlichkeit, genau **ein** Problem löst.
