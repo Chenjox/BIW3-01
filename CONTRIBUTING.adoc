@@ -7,6 +7,7 @@ Commit Messages::
 Conding Style::
   Es gelten folgende Regeln.
 Einrückungen::: Es sind pro Block 2 Leerzeichen einzurücken.
++
 [source,fortran]
 ====
 program foo
@@ -25,6 +26,7 @@ end program foo
 ====
 +
 Deklarationen::: Variablendeklarationen sind stets mit `::` zu schreiben.
++
 [source,fortran]
 ====
 program foo
@@ -36,6 +38,7 @@ end program foo
 ====
 +
 In Subroutinen und Funktionen sind **Eingabeparameter** immer zuerst zu deklarieren.
++
 [source,fortran]
 ====
 subroutine bar(foo,baz,foobar)
