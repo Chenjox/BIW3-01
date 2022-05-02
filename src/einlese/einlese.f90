@@ -1,5 +1,5 @@
 
-subroutine einlesen(filepath)
+function systemEinlesen(filepath) result(system)
   use kenngroessen
   implicit none
 
@@ -73,4 +73,4 @@ subroutine einlesen(filepath)
 
   close(unit=10)
 
-end subroutine einlesen
+end function SystemEinlesen
