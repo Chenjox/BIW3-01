@@ -28,7 +28,7 @@ Es wird angenommen, dass `gfortran` auf dem `PATH` erreichbar ist.
 .Windows
 [source,dos]
 ====
-gfortran src/main.f90 src/einlese/einlese.f90 -o build/out.exe
+gfortran src/main.f90 src/einlese/einlese.f90 src/modules/staebe.f90 -o build/out.exe
 ====
 
 bzw.
