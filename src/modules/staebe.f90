@@ -10,11 +10,11 @@ module kenngroessen
     integer :: KnotenUnstetigkeiten
   end type stab
 
-  type system2D
-    integer    :: AnzahlStaebe
-    integer    :: AnzahlKnoten
+  type system2D(AnzahlStaebe, AnzahlKnoten)
+    integer, len    :: AnzahlStaebe
+    integer, len    :: AnzahlKnoten
     type(stab) :: staebe(AnzahlStaebe)
-    real       :: knotenKoordinaten(2,AnzahlKnoten)
+    real       :: KnotenKoordinaten(2,AnzahlKnoten)
     real       :: VektorKnotenlasten(AnzahlKnoten*3)
     real       :: VektorVerschiebungen(AnzahlKnoten*3)
   end type system2D
