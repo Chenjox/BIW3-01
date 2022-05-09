@@ -1,14 +1,30 @@
 program haupt
   use kenngroessen
   implicit none
-  type(system2D(1,1)) :: systema
+  integer :: nKnoten
+  integer :: nStaebe
+  type(system2D(:,:)), allocatable :: systema
   interface
-    function systemEinlesen(filename) result(system)
+    subroutine systemEinlesen(ioUnit, nKnoten, nStaebe,system)
       use kenngroessen
-      character :: filename
-      type(system2D(:,:)), allocatable :: system
-    end function systemEinlesen
+      integer :: ioUnit ! Hier ist die ioUnit
+      integer :: nKnoten
+      integer :: nStaebe
+      type(system2D(nKnoten,nStaebe)) :: system
+    end subroutine systemEinlesen
   end interface
-  systema = systemEinlesen("testdm1.TXT")
+
+  ! Hier kommt jetzt extremst hässlicher code, aber es geht nicht anders
+  ! In Compiler Version 9.2.0 kommt sonst
+  ! f951.exe: internal compiler error: gfc_compare_array_spec(): Array spec clobbered
+  open(unit=10, file="testdm1.TXT")
+
+  read(unit=10, fmt=*) nKnoten, nStaebe
+
+  allocate(system2D(nKnoten, nStaebe) :: systema)
+
+  call systemEinlesen(10, nKnoten, nStaebe, systema)
+
+  close(unit=10)
 
 end program haupt
