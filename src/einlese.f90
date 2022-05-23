@@ -1,4 +1,5 @@
 
+
 ! ------------------------------------------------------------------------------
 subroutine einlesen(pfad, FehlerNummer)
   ! ----------------------------------------------------------------------------
@@ -21,11 +22,11 @@ subroutine einlesen(pfad, FehlerNummer)
 
   call ffread(momentaneZeile, ZahlenListe, LaengeListe)
 
-  if(int(ZahlenListe(1)).lt.0) then
-    stop "Anzahl der Knoten ist kleiner als 0!"
+  if(int(ZahlenListe(1)).le.0) then
+    stop "Anzahl der Knoten ist kleiner gleich 0!"
   end if
-  if(int(ZahlenListe(2)).lt.0) then
-    stop "Anzahl der Steabe ist kleiner als 0!"
+  if(int(ZahlenListe(2)).le.0) then
+    stop "Anzahl der Steabe ist kleiner gleich 0!"
   end if
 
 end subroutine einlesen
