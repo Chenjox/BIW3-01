@@ -9,7 +9,7 @@ subroutine systemEinlesen(ioUnit, nKnoten, nStaebe,system)
   integer :: ios
   integer :: nStuetzKnoten
   real    :: Emodul
-  type(system2D(AnzahlKnoten,AnzahlStaebe)) :: system
+  !type(system2D(AnzahlKnoten,AnzahlStaebe)) :: system
   integer :: i,k
 
   read(unit=ioUnit, fmt=*) nStuetzKnoten
@@ -22,27 +22,27 @@ subroutine systemEinlesen(ioUnit, nKnoten, nStaebe,system)
     ! Der Erste Index ist jeweils die X und Y Koordinate
     ! Der Zweite Index ist die Nummer des Knotens
     ! Die letzten nStuetzKnoten sind die Auflagerknoten!
-    read(unit=ioUnit, fmt=*) system%KnotenKoordinaten(1,k), & !Zeile zu lang...
-                         system%KnotenKoordinaten(2,k)
+    read(unit=ioUnit, fmt=*) systemA%KnotenKoordinaten(1,k), & !Zeile zu lang...
+                         systemA%KnotenKoordinaten(2,k)
   end do
 
   ! Jetzt kommen die Stäbe
   ! allocate(Staebe(nStaebe))
   do i = 1, nStaebe
     ! Stab-Nr.  Nr.Anfangsknoten  Nr.Endknoten  A[m2]  I[m4]  alpha[rad]  Art
-    read(unit=ioUnit, fmt=*) k, system%staebe(i)%vonKnoten, &
-                            system%staebe(i)%zuKnoten, &
-                            system%staebe(i)%Area, &
-                            system%staebe(i)%FTM, &
-                            system%staebe(i)%alpha, &
-                            system%staebe(i)%KnotenUnstetigkeiten
+    read(unit=ioUnit, fmt=*) k, systemA%staebe(i)%vonKnoten, &
+                            systemA%staebe(i)%zuKnoten, &
+                            systemA%staebe(i)%Area, &
+                            systemA%staebe(i)%FTM, &
+                            systemA%staebe(i)%alpha, &
+                            systemA%staebe(i)%KnotenUnstetigkeiten
     ! Die Stabnummer ist der Index des Arrays, ich gehe davon aus, dass die nicht von dem ganzen anderem Abweicht
   end do
 
   ! Und abschließend die Einwirkungen
   ! Am Ende des Tages sind dies zwei Vektoren der Größe AnzahlKnoten*3 mit 0.0 und Unbekannten, hier mit NaN bezeichnet
-  system%VektorKnotenlasten=0.0
-  system%VektorVerschiebungen=0.0
+  systemA%VektorKnotenlasten=0.0
+  systemA%VektorVerschiebungen=0.0
 
   ! Wir lesen bis zum Ende der Datei, und brechen im richtigen Durchlauf ab
   reading: do
@@ -54,13 +54,13 @@ subroutine systemEinlesen(ioUnit, nKnoten, nStaebe,system)
       !Knotennummer ist tatsächlich vorhanden also den Rest einlesen
       read(unit=ioUnit, fmt="(I5.2)", advance="no") i ! i ist hierbei die Art der Belastung
       if ( i.eq.0 ) then
-        read(unit=ioUnit, fmt=*) system%VektorKnotenlasten(3*k), &
-                             system%VektorKnotenlasten(3*k+1), &
-                             system%VektorKnotenlasten(3*k+2)
+        read(unit=ioUnit, fmt=*) systemA%VektorKnotenlasten(3*k), &
+                             systemA%VektorKnotenlasten(3*k+1), &
+                             systemA%VektorKnotenlasten(3*k+2)
       else
-        read(unit=ioUnit, fmt=*) system%VektorVerschiebungen(3*k), &
-                             system%VektorVerschiebungen(3*k+1), &
-                             system%VektorVerschiebungen(3*k+2)
+        read(unit=ioUnit, fmt=*) systemA%VektorVerschiebungen(3*k), &
+                             systemA%VektorVerschiebungen(3*k+1), &
+                             systemA%VektorVerschiebungen(3*k+2)
       end if
     end if
   end do reading

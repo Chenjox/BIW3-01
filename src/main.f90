@@ -3,14 +3,14 @@ program haupt
   implicit none
   integer :: nKnoten
   integer :: nStaebe
-  type(system2D(:,:)), allocatable :: systema
+  !type(system2D(:,:)), allocatable :: systema
   interface
-    subroutine systemEinlesen(ioUnit, nKnoten, nStaebe,system)
+    subroutine systemEinlesen(ioUnit, nKnoten, nStaebe)
       use kenngroessen
       integer :: ioUnit ! Hier ist die ioUnit
       integer :: nKnoten
       integer :: nStaebe
-      type(system2D(nKnoten,nStaebe)) :: system
+      !type(system2D(nKnoten,nStaebe)) :: system
     end subroutine systemEinlesen
   end interface
 
@@ -21,9 +21,9 @@ program haupt
 
   read(unit=10, fmt=*) nKnoten, nStaebe
 
-  allocate(system2D(nKnoten, nStaebe) :: systema)
+  allocate(system2D(nKnoten, nStaebe) :: systemA)
 
-  call systemEinlesen(10, nKnoten, nStaebe, systema)
+  call systemEinlesen(10, nKnoten, nStaebe)
 
   close(unit=10)
 
