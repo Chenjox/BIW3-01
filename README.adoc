@@ -24,12 +24,12 @@ Das `src` Verzeichnis beinhaltet alle Quelltextdateien, das `build` Verzeichnis 
 
 == Befehl zum Kompilieren
 
-Es wird angenommen, dass `gfortran` auf dem `PATH` erreichbar ist.
+Es wird angenommen, dass `gfortran` und `gnuplot` auf dem `PATH` erreichbar sind.
 
 .Windows
 [source,dos]
 ----
-gfortran src/main.f90 src/einlese/einlese.f90 src/modules/staebe.f90 -Jbuild -o build/out.exe
+gfortran src/main.f90 src/einlese.f90 src/modules/module.f90 -Jbuild -o build/out.exe
 ----
 
 bzw.
