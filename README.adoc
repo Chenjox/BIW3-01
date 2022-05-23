@@ -29,7 +29,7 @@ Es wird angenommen, dass `gfortran` und `gnuplot` auf dem `PATH` erreichbar sind
 .Windows
 [source,dos]
 ----
-gfortran src/main.f90 src/einlese.f90 src/modules/module.f90 -Jbuild -o build/out.exe
+gfortran src/main.f90 src/einlese.f90 src/FFREAD.FOR src/rconv.FOR src/modules/module.f90 -Jbuild -o build/out.exe
 ----
 
 bzw.
