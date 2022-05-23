@@ -10,14 +10,15 @@ Da ich nicht weiß wie man ordentlich ein Fortran Projekt aufbaut, habe ich will
 Es gibt folgenden Aufbau innerhalb des `root` Verzeichnisses
 
 .Struktur des Repositories
-====
+[source]
+----
 root
 |-- src
     |-- subroutines
     |-- util
     |-- main.f90
 |-- build
-====
+----
 
 Das `src` Verzeichnis beinhaltet alle Quelltextdateien, das `build` Verzeichnis beinhaltet alle Modules und auch die resultierende ausführbare Datei.
 
@@ -27,24 +28,24 @@ Es wird angenommen, dass `gfortran` auf dem `PATH` erreichbar ist.
 
 .Windows
 [source,dos]
-====
+----
 gfortran src/main.f90 src/einlese/einlese.f90 src/modules/staebe.f90 -Jbuild -o build/out.exe
-====
+----
 
 bzw.
 
 .Unix-like Systeme
 [source,dos]
-====
+----
 gfortran src/main.f90 -o build/out.out
-====
+----
 
 == Code Stil
 
 Es werden 2 zentrale Prinzipien in diesem Repository eingehalten:
 
-DRY:: Dont. Repeat. Yourself
-Jegliche Unterprogramme und oder Funktionen müssen als solche ausgelagert werden. Es werden keine redundanten Algorithmen akzeptiert.
+// DRY:: Dont. Repeat. Yourself
+// Jegliche Unterprogramme und oder Funktionen müssen als solche ausgelagert werden. Es werden keine redundanten Algorithmen akzeptiert.
 
 RAII:: Resource Aquisition is Initialization.
 Dieses Prinzip ist damit eingehalten, dass jeder Programmabschnitt genau **eine** Verantwortlichkeit, genau **ein** Problem löst.
