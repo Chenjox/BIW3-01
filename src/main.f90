@@ -24,6 +24,8 @@ program haupt
 
   end do
 
+  write(*,*) koordinatenmatrix
+
   ! Deformationsmethode -- Aufbau der Globalen Steifigkeitsmatrix
 
   ! Deformationsmethode -- Aufbau des Vektors der Knotenlasten
