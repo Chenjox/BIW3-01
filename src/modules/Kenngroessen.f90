@@ -3,14 +3,6 @@ module kenngroessen
 
   implicit none
 
-  integer nk, ns                          !deklarieren von Knotenanzahl, Stabanzahl
-  integer nf                              !deklarieren von der Anzahl der Stützknoten
-  real E
-  !-----------------------------------------------------------------------------
-  !Initialiseren unserer Variablen für die Knotenanzahl und die Stabanzahl findet beim Einlesen
-
-  ! Erster Index x bzw. y, zweiter index = Knotenindex
-  real :: koordinatenmatrix(20,2)
 
 !-------------------------------------------------------------------------------
 !Belastungsmatrix
@@ -24,6 +16,16 @@ module kenngroessen
     integer :: art                            !Art(Unstetigkeit)
   end type stab
 
-  type(stab) :: staebe(1:100)
+  !type(stab) :: staebe(1:100)
+  !-----------------------------------------------------------------------------
+  !Deklarieren unserer Variablen
+    integer nk, ns                                !deklarieren von Knotenanzahl, Stabanzahl
+    integer nf                                    !deklarieren von der Anzahl der Stützknoten
+    real E
+    integer              :: AnzBelastung          !Anzahl der Belastungen
+    real, allocatable :: koordinatenmatrix(:,:)   ! Erster Index x bzw. y, zweiter index = Knotenindex
+    type(stab), allocatable :: staebe(:)              !Anzahl der Stäbe
+    !-----------------------------------------------------------------------------
+    !Initialiseren unserer Variablen für die Knotenanzahl und die Stabanzahl findet beim Einlesen
 
 end module kenngroessen

@@ -60,6 +60,7 @@ subroutine einlesen(pfad, FehlerNummer)
 ! ------------------------------------------------------------------------------
 !Einlesen der Knoten und der Koordinaten der Knoten
 ! ------------------------------------------------------------------------------
+allocate (koordinatenmatrix(nk,2))                            !die Größe der Matrix mit den Koordinaten der Knoten erfolgt in diesem Schritt
   do i = 1, nk
     momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
     read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
@@ -71,6 +72,7 @@ subroutine einlesen(pfad, FehlerNummer)
 ! ------------------------------------------------------------------------------
 !Einlesen der Stäbe in den Komplexen Datentypen
 ! ------------------------------------------------------------------------------
+allocate(staebe(ns))
   do i = 1, ns
     momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
     read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
@@ -92,7 +94,7 @@ subroutine einlesen(pfad, FehlerNummer)
 
 !Listenlaenge = 1
 i= 0
-
+AnzBelastung = 0
 do                                                          !UNENDLICHE SCHLEIFE bis Austrittsbedingung erfüllt ist
   i = i +1                                                  !Hochzählen des Integers um die Belastungsmatrix zu füllen
   momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
@@ -105,6 +107,8 @@ do                                                          !UNENDLICHE SCHLEIFE
       Belastungsmatrix(i,3) = ZahlenListe(3)                   !Initialiseren von P1/V1
       Belastungsmatrix(i,4) = ZahlenListe(4)                   !Initialiseren von P2/V2
       Belastungsmatrix(i,5) = ZahlenListe(5)                   !Initialiseren von M3/Phi
+
+      AnzBelastung = AnzBelastung+1
   else
     exit
   end if
