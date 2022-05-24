@@ -10,17 +10,18 @@ module kenngroessen
   !Initialiseren unserer Variablen für die Knotenanzahl und die Stabanzahl findet beim Einlesen
 
   ! Erster Index x bzw. y, zweiter index = Knotenindex
-  real :: koordinatenmatrix(2,100)
-  type FreierKnoten                       !definieren eines komplexen Datentypen Stab
-    integer :: art
-    real :: x,y                           !Koordinaten des Knotens
-  end type
+  real :: koordinatenmatrix(20,2)
 
-  !type(Knoten) :: Knoten(1:100)
+!-------------------------------------------------------------------------------
+!Belastungsmatrix
+!FÜR ART 0 (KRAFT/MOMENT): (NummerKnoten, Art, P1, P2, M3) bzw P in x1, P in x2, M in Phi
+!FÜR ART 1 (VERSCHIEBUNG): (NummerKnoten, Art, Verschiebung in x, Verschiebung in y, Verdrehung Phi)
+  real :: Belastungsmatrix(20,5)
 
-  type stab                               !definieren eines komplexen Datentypen Stab
-    integer :: art
-    real :: x(2),y(2),E,A,I               !x1,x2,y1,y2,E-Modul,QSFläche, Flächenträgheitsmoment
+  type stab                                   !definieren eines komplexen Datentypen Stab
+    integer :: NrStab, K1, K2                 !Stabnummer, Knoten1, Knoten2, Stabnummer
+    real :: E,A,I, alpha                      !E-Modul,QSFläche, Flächenträgheitsmoment, Winkel Alpha
+    integer :: art                            !Art(Unstetigkeit)
   end type stab
 
   type(stab) :: staebe(1:100)

@@ -8,6 +8,7 @@ program haupt
   ! Variablendeklarationen
   character(len=255) :: pfad
   integer            :: FehlerNummer
+  integer i                                             !Zählvariable
   ! Variableninitialisierungen
   FehlerNummer = 1
   pfad = ''
@@ -23,8 +24,23 @@ program haupt
     call einlesen(pfad, FehlerNummer)
 
   end do
+write(*,*) 'DEBUGGING'
+  do i=1, nk
+    write(*,*) koordinatenmatrix(i,1), koordinatenmatrix(i,2)
+  enddo
+  write(*,*) 'E-Modul: ', E
+  write(*,*) 'nf, ns, nk: ',nf, ns,nk
+  write(*,*) 'Stab: ', staebe(11)
 
-  write(*,*) koordinatenmatrix
+    read(*,*)
+
+  do i=1,20
+    write(*,*)Belastungsmatrix(i,1),Belastungsmatrix(i,2),Belastungsmatrix(i,3),Belastungsmatrix(i,4),Belastungsmatrix(i,5)
+  enddo
+
+  read(*,*)
+
+
 
   ! Deformationsmethode -- Aufbau der Globalen Steifigkeitsmatrix
 
