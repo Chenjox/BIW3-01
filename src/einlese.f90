@@ -7,7 +7,7 @@ subroutine einlesen(pfad, FehlerNummer)
   implicit none
   ! Variablendeklarationen -----------------------------------------------------
   integer, INTENT(OUT) :: FehlerNummer
-  integer              :: ios, LaengeListe
+  integer              :: ios, Listenlaenge
   character(len=255), INTENT(IN) :: pfad
   character(len=255)   :: momentaneZeile
   real                 :: ZahlenListe(100)
@@ -20,7 +20,7 @@ subroutine einlesen(pfad, FehlerNummer)
 
   read(unit=20,fmt='(A255)') momentaneZeile
 
-  call ffread(momentaneZeile, ZahlenListe, LaengeListe)
+  call ffread(momentaneZeile, ZahlenListe, Listenlaenge)
 
   if(int(ZahlenListe(1)).le.0) then
     stop "Anzahl der Knoten ist kleiner gleich 0!"

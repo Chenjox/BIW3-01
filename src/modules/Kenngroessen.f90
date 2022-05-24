@@ -3,7 +3,7 @@ module kenngroessen
 
   implicit none
 
-  int nk, ns                              !definieren von Knotenanzahl, Stabanzahl
+  integer nk, ns                           !definieren von Knotenanzahl, Stabanzahl
 
   !-----------------------------------------------------------------------------
   !Deklarieren unserer Variablen für die Knotenanzahl und die Stabanzahl findet beim Einlesen
