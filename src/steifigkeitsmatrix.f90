@@ -1,7 +1,5 @@
 use kenngroessen
 
-real :: Stabsteifigkeitsmatrix(3,3)
-
 !Stabsteifigkeitsmatrix K(ik,k) für Elemente die obere rechte Dreiecksmatrix (untere linke ergibt sich daraus weil symmetrisch)
 
 do s=1, ns

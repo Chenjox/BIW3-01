@@ -63,4 +63,10 @@ write(*,*) 'Anzahl der Belastungen: ', AnzBelastung
   ! Ausgeben mit Gnuplot
 
 
+!Befüllung der Gesamtmatrix mit einzelnen Steifigkeitsmatrizen
+
+call matrixfuell
+
+  read(*,*)
+
 end program haupt

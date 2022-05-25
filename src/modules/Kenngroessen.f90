@@ -3,6 +3,9 @@ module kenngroessen
 
   implicit none
 
+  real :: Stabsteifigkeitsmatrix(3,3)
+
+  real, allocatable :: Gesamtsteifigkeitsmatrix(:,:)
 
 !-------------------------------------------------------------------------------
 !Belastungsmatrix
