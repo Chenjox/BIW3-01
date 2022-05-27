@@ -8,7 +8,11 @@ program haupt
   ! Variablendeklarationen
   character(len=255) :: pfad
   integer            :: FehlerNummer
-  integer i                                             !Zählvariable
+  integer i, j                                             !Zählvariable
+
+    !für matrixfuell
+    integer ki, kj, f
+
   ! Variableninitialisierungen
   FehlerNummer = 1
   pfad = ''
@@ -65,7 +69,20 @@ write(*,*) 'Anzahl der Belastungen: ', AnzBelastung
 
 !Befüllung der Gesamtmatrix mit einzelnen Steifigkeitsmatrizen
 
-call matrixfuell
+!call matrixfuell(nk,nf,Stabsteifigkeitsmatrix,ki,kj)
+
+!Test 3x3 Matrix befüllen
+do i=1,3                              !Zeilen
+  do j=1,3                            !Spalten
+      f=f+1
+      Stabsteifigkeitsmatrix(i,j) = f
+  end do
+end do
+
+ki=1  !gewünschte Zeile in Gesamtsteifigkeitsmatrix
+kj=1  !gewünschet Spalte in Gesamtsteifigkeitsmatrix
+
+call matrixfuell(ki,kj)
 
   read(*,*)
 
