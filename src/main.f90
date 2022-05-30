@@ -28,7 +28,7 @@ program haupt
     call einlesen(pfad, FehlerNummer)
 
   end do
-write(*,*) 'DEBUGGING'
+  write(*,*) 'DEBUGGING'
   do i=1, nk
     write(*,*) koordinatenmatrix(i,1), koordinatenmatrix(i,2)
   enddo
@@ -43,7 +43,7 @@ write(*,*) 'DEBUGGING'
     write(*,*)Belastungsmatrix(i,1),Belastungsmatrix(i,2),Belastungsmatrix(i,3),Belastungsmatrix(i,4),Belastungsmatrix(i,5)
   enddo
 
-write(*,*) 'Anzahl der Belastungen: ', AnzBelastung
+  write(*,*) 'Anzahl der Belastungen: ', AnzBelastung
 
   read(*,*)
 
@@ -67,22 +67,22 @@ write(*,*) 'Anzahl der Belastungen: ', AnzBelastung
   ! Ausgeben mit Gnuplot
 
 
-!Befüllung der Gesamtmatrix mit einzelnen Steifigkeitsmatrizen
+  !Befüllung der Gesamtmatrix mit einzelnen Steifigkeitsmatrizen
 
-!call matrixfuell(nk,nf,Stabsteifigkeitsmatrix,ki,kj)
+  !call matrixfuell(nk,nf,Stabsteifigkeitsmatrix,ki,kj)
 
-!Test 3x3 Matrix befüllen
-do i=1,3                              !Zeilen
-  do j=1,3                            !Spalten
+  !Test 3x3 Matrix befüllen
+  do i=1,3                              !Zeilen
+    do j=1,3                            !Spalten
       f=f+1
       Stabsteifigkeitsmatrix(i,j) = f
+    end do
   end do
-end do
 
-ki=1  !gewünschte Zeile in Gesamtsteifigkeitsmatrix
-kj=1  !gewünschet Spalte in Gesamtsteifigkeitsmatrix
+  ki=1  !gewünschte Zeile in Gesamtsteifigkeitsmatrix
+  kj=1  !gewünschet Spalte in Gesamtsteifigkeitsmatrix
 
-call matrixfuell(ki,kj)
+  call matrixfuell(ki,kj)
 
   read(*,*)
 
