@@ -7,13 +7,15 @@ subroutine matrixfuell(ki,kj)
   implicit none
 
   integer i, j, f, ki, kj, starti, startj
+  real, dimension(3,3) :: smallMatrix
 
   allocate(Gesamtsteifigkeitsmatrix((nk-nf)*3,(nk-nf)*3))  !Dimension = AnzKnoten- AnzStützknoten = AnzfreieKnoten
 
+  smallMatrix = 1
   Gesamtsteifigkeitsmatrix = 0
 
   !kleine Matrix in die große einfügen, wobei ki und kj den Ort in der großen Matrix angeben
-  !call fillIntoMatrix(Gesamtsteifigkeitsmatrix, )
+  call fillIntoMatrix(Gesamtsteifigkeitsmatrix, smallMatrix, (nk-nf)*3, 3, 4)
 
 
   call printMatrix(Gesamtsteifigkeitsmatrix, (nk-nf)*3)
