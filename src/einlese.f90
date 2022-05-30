@@ -15,10 +15,10 @@ subroutine einlesen(pfad, FehlerNummer)
   integer i                                                 !deklarieren von einer Zählvariable
   ! Datei öffen
 
-  write(*,*) 'Ich versuche die folgende Datei einzulesen:', pfad
-  read(*,*)
+  write(*,*) 'Ich versuche die folgende Datei einzulesen: ', pfad
   open(unit=20, file=pfad, status='old',iostat=ios)
   if(ios.ne.0) then
+    write(*,*) 'Ich konnte die Datei nicht lesen. Bitte nochmal versuchen.'
     FehlerNummer=1
     return
   end if
@@ -60,7 +60,7 @@ subroutine einlesen(pfad, FehlerNummer)
 ! ------------------------------------------------------------------------------
 !Einlesen der Knoten und der Koordinaten der Knoten
 ! ------------------------------------------------------------------------------
-allocate (koordinatenmatrix(nk,2))                            !die Größe der Matrix mit den Koordinaten der Knoten erfolgt in diesem Schritt
+  allocate (koordinatenmatrix(nk,2))                            !die Größe der Matrix mit den Koordinaten der Knoten erfolgt in diesem Schritt
   do i = 1, nk
     momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
     read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
@@ -72,7 +72,7 @@ allocate (koordinatenmatrix(nk,2))                            !die Größe der M
 ! ------------------------------------------------------------------------------
 !Einlesen der Stäbe in den Komplexen Datentypen
 ! ------------------------------------------------------------------------------
-allocate(staebe(ns))
+  allocate(staebe(ns))
   do i = 1, ns
     momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
     read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
@@ -92,16 +92,16 @@ allocate(staebe(ns))
 ! ------------------------------------------------------------------------------
 
 
-!Listenlaenge = 1
-i= 0
-AnzBelastung = 0
-do                                                          !UNENDLICHE SCHLEIFE bis Austrittsbedingung erfüllt ist
-  i = i +1                                                  !Hochzählen des Integers um die Belastungsmatrix zu füllen
-  momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
-  read(unit=20,fmt='(A255)',iostat=ios) momentaneZeile      !Einlesen, wenn end of file ios wird zu 1 gesetzt!!!!!!
+  !Listenlaenge = 1
+  i= 0
+  AnzBelastung = 0
+  do                                                          !UNENDLICHE SCHLEIFE bis Austrittsbedingung erfüllt ist
+    i = i +1                                                  !Hochzählen des Integers um die Belastungsmatrix zu füllen
+    momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
+    read(unit=20,fmt='(A255)',iostat=ios) momentaneZeile      !Einlesen, wenn end of file ios wird zu 1 gesetzt!!!!!!
 
-  if (ios.eq.0) then                                        !Abbruchkriterium End of File feststelen
-    call ffread(momentaneZeile, ZahlenListe, Listenlaenge)    !Einlesen der nächsten Zeile
+    if (ios.eq.0) then                                        !Abbruchkriterium End of File feststelen
+      call ffread(momentaneZeile, ZahlenListe, Listenlaenge)    !Einlesen der nächsten Zeile
       Belastungsmatrix(i,1) = ZahlenListe(1)                   !Initialiseren von Knotennummer
       Belastungsmatrix(i,2) = ZahlenListe(2)                   !Initialiseren von ART
       Belastungsmatrix(i,3) = ZahlenListe(3)                   !Initialiseren von P1/V1
@@ -109,10 +109,10 @@ do                                                          !UNENDLICHE SCHLEIFE
       Belastungsmatrix(i,5) = ZahlenListe(5)                   !Initialiseren von M3/Phi
 
       AnzBelastung = AnzBelastung+1
-  else
-    exit
-  end if
-enddo
+    else
+      exit
+    end if
+  enddo
 
 
   FehlerNummer = 0                                            !Alles OKAY
