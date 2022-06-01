@@ -71,19 +71,7 @@ program haupt
 
   !call matrixfuell(nk,nf,Stabsteifigkeitsmatrix,ki,kj)
 
-  !Test 3x3 Matrix befüllen
-  do i=1,3                              !Zeilen
-    do j=1,3                            !Spalten
-      f=f+1
-      Stabsteifigkeitsmatrix(i,j) = f
-    end do
-  end do
 
-  ki=1  !gewünschte Zeile in Gesamtsteifigkeitsmatrix
-  kj=1  !gewünschet Spalte in Gesamtsteifigkeitsmatrix
-
-  call matrixfuell(ki,kj)
-
-  read(*,*)
+  call transglobal(30,Stabsteifigkeitsmatrix,StabsteifigkeitGlobal)
 
 end program haupt
