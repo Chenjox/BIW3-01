@@ -72,6 +72,19 @@ program haupt
   !call matrixfuell(nk,nf,Stabsteifigkeitsmatrix,ki,kj)
 
 
-  call transglobal(30,Stabsteifigkeitsmatrix,StabsteifigkeitGlobal)
+!Testabschnitt für transformation.f90
+  Stabsteifigkeitsmatrix=1
+  StabsteifigkeitGlobal=0
+
+  call transglobal(staebe(4)%alpha,Stabsteifigkeitsmatrix,StabsteifigkeitGlobal)
+
+  write(*,*) 'Alpha'
+  write(*,*)  staebe(4)%alpha
+  write(*,*) 'lokal'
+  write(*,*) Stabsteifigkeitsmatrix
+  write(*,*) 'global'
+  write(*,*) StabsteifigkeitGlobal
+  read(*,*)
+!-------------------------------------
 
 end program haupt

@@ -4,7 +4,7 @@ module kenngroessen
   implicit none
 
   real :: Stabsteifigkeitsmatrix(3,3)
-
+  real :: StabsteifigkeitGlobal(3,3)
   real, allocatable :: Gesamtsteifigkeitsmatrix(:,:)
 
 !-------------------------------------------------------------------------------
