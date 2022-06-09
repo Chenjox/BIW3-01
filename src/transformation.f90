@@ -27,7 +27,7 @@ real, dimension(3,3), INTENT(OUT):: matglobal
   matglobal = MATMUL(MATMUL(T,matlokal),TRANSPOSE(T))     !MATMUL     - Matrizenmultiplikation
                                                           !TRANSPOSE  - Transponierte Matrix erstellen
 
-  call printMatrix(matglobal,3)
+  !call printMatrix(matglobal,3)
 
 endsubroutine
 
