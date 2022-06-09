@@ -51,7 +51,11 @@ subroutine rueckwaerts
     knotenrandschnittkraefte = MATMUL(lokaleStartMatrix,lokaleStartVerschiebungen) &
                               + MATMUL(lokaleEndMatrix,lokaleEndVerschiebungen)
 
+<<<<<<< HEAD
     !write(*,*) 'Randschnittkraefte am Stab ',staebe(i)%K1,' ',staebe(i)%K2,knotenrandschnittkraefte
+=======
+    write(*,*) 'Randschnittkraefte am Stab ',staebe(i)%K1,' ',staebe(i)%K2,knotenrandschnittkraefte
+>>>>>>> e2d5ae501533b43dcdc55311958a361ad5eb8a29
 
     !Einsortieren
     Stabrandschnittkraftmatrix(i,1) = knotenrandschnittkraefte(1,1)
