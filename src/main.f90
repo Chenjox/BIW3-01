@@ -43,12 +43,15 @@ program haupt
 
   ! Deformationsmethode -- Aufbau des Vektors der Knotenlasten
 
-
+  call aufbauVektorknotenlasten
 
   ! Deformationsmethode -- Aufbau des Vektors der Knotenverschiebungen
 
   ! Deformationsmethode -- Lösen des Gleichungssystems
-  ! --- Auflagerknoten müssen in der Steifigkeitsmatrix rausgestrichen werden
+
+  call lousungGLS
+
+  write(*,*) VektorKnotenverschiebungen
 
   ! Deformationsmethode -- Rückwärtseinsetzen der Verschiebungen
 

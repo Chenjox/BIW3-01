@@ -59,10 +59,8 @@ real, dimension(3,3), INTENT(IN):: matglobal
   T(3,3) = 1
 
 !Globale Steifigkeitsmatrix ausrechnen
-  matglobal = 0                                           !Funktionen von Fortran:
-  matglobal = MATMUL(TRANSPOSE(T),matglobal)              !MATMUL     - Matrizenmultiplikation
-                                                          !TRANSPOSE  - Transponierte Matrix erstellen
-
-  call printMatrix(matglobal,3)
+  matlokal = 0                                           !Funktionen von Fortran:
+  matlokal = MATMUL(TRANSPOSE(T),matglobal)              !MATMUL     - Matrizenmultiplikation
+                                                          !TRANSPOSE  - Transponierte Matrix erstellen)
 
 endsubroutine

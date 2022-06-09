@@ -29,7 +29,8 @@ Es wird angenommen, dass `gfortran` und `gnuplot` auf dem `PATH` erreichbar sind
 .Windows
 [source,dos]
 ----
-gfortran src/modules/Kenngroessen.f90 src/steifigkeitsmatrix.f90 src/aufbauSteifigkeit.f90 src/transformation.f90 src/helper.f90 src/matrixfuell.f90 src/main.f90 src/einlese.f90 src/FFREAD.FOR src/rconv.FOR -Jbuild -o build/outa.exe
+gfortran src/modules/Kenngroessen.f90 src/steifigkeitsmatrix.f90 src/aufbauSteifigkeit.f90 src/transformation.f90 src/helper.f90 src/matrixfuell.f90 src/main.f90 src/einlese.f90 src/loesungGLS.f90 src/aufbauVektorKnotenlasten.f90 src/GAUSZ.FOR src/FFREAD.FOR src/rconv.FOR -Jbuild -o build/outa.exe
+start outa.exe
 ----
 
 bzw.

@@ -5,7 +5,6 @@ subroutine aufbauVektorknotenlasten
 
   VektorKnotenlasten=0
 
-
   do i = 1, 20
     if(int(Belastungsmatrix(i,1)).eq.0) then
       exit
