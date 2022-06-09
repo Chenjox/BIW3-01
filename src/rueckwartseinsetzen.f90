@@ -7,6 +7,8 @@ subroutine rueckwaerts
   real*8  :: knotenrandschnittkraefte(3,1)
   real*8  :: globaleVerschiebungen(3,1)
 
+  Stabrandschnittkraftmatrix = 0
+
   do i = 1, ns
     startKnotenIndex = staebe(i)%K1*3-2
     endKnotenIndex = staebe(i)%K2*3-2
@@ -15,17 +17,33 @@ subroutine rueckwaerts
     lokaleEndVerschiebungen   = 0
     globaleVerschiebungen     = 0
 
-    globaleVerschiebungen(1,1) = VektorKnotenverschiebungen(startKnotenIndex)
-    globaleVerschiebungen(2,1) = VektorKnotenverschiebungen(startKnotenIndex+1)
-    globaleVerschiebungen(3,1) = VektorKnotenverschiebungen(startKnotenIndex+2)
+    ! Wenn es KEIN Stützknoten ist, dann hole dir die Verschiebungen
 
-    call translokalVektor(staebe(i)%alpha, globaleVerschiebungen, lokaleStartVerschiebungen)
+    if(staebe(i)%K1.le.(nk-nf)) then
+      globaleVerschiebungen(1,1) = VektorKnotenverschiebungen(startKnotenIndex)
+      globaleVerschiebungen(2,1) = VektorKnotenverschiebungen(startKnotenIndex+1)
+      globaleVerschiebungen(3,1) = VektorKnotenverschiebungen(startKnotenIndex+2)
 
-    globaleVerschiebungen(1,1) = VektorKnotenverschiebungen(endKnotenIndex)
-    globaleVerschiebungen(2,1) = VektorKnotenverschiebungen(endKnotenIndex+1)
-    globaleVerschiebungen(3,1) = VektorKnotenverschiebungen(endKnotenIndex+2)
+      call translokalVektor(staebe(i)%alpha, globaleVerschiebungen, lokaleStartVerschiebungen)
+    else
+      lokaleStartVerschiebungen = 0
+    end if
 
-    call translokalVektor(staebe(i)%alpha, globaleVerschiebungen, lokaleEndVerschiebungen)
+    if(staebe(i)%K2.le.(nk-nf)) then
+      globaleVerschiebungen(1,1) = VektorKnotenverschiebungen(endKnotenIndex)
+      globaleVerschiebungen(2,1) = VektorKnotenverschiebungen(endKnotenIndex+1)
+      globaleVerschiebungen(3,1) = VektorKnotenverschiebungen(endKnotenIndex+2)
+
+      call translokalVektor(staebe(i)%alpha, globaleVerschiebungen, lokaleEndVerschiebungen)
+    else
+      lokaleEndVerschiebungen = 0
+    end if
+
+    ! Zuerst der Anfangsknoten
+
+    lokaleStartMatrix = 0
+    lokaleEndMatrix = 0
+    knotenrandschnittkraefte = 0
 
     call StabsteifigkeitLokalIKIK(staebe(i),lokaleStartMatrix)
     call StabsteifigkeitLokalKIIK(staebe(i),lokaleEndMatrix)
@@ -33,10 +51,18 @@ subroutine rueckwaerts
     knotenrandschnittkraefte = MATMUL(lokaleStartMatrix,lokaleStartVerschiebungen) &
                               + MATMUL(lokaleEndMatrix,lokaleEndVerschiebungen)
 
+    write(*,*) 'Randschnittkraefte am Stab ',staebe(i)%K1,' ',staebe(i)%K2,knotenrandschnittkraefte
+
     !Einsortieren
     Stabrandschnittkraftmatrix(i,1) = knotenrandschnittkraefte(1,1)
     Stabrandschnittkraftmatrix(i,2) = knotenrandschnittkraefte(2,1)
     Stabrandschnittkraftmatrix(i,3) = knotenrandschnittkraefte(3,1)
+
+    ! Jetzt der Andere Knoten
+
+    lokaleStartMatrix = 0
+    lokaleEndMatrix = 0
+    knotenrandschnittkraefte = 0
 
     call StabsteifigkeitLokalIKKI(staebe(i),lokaleStartMatrix)
     call StabsteifigkeitLokalKIKI(staebe(i),lokaleEndMatrix)
