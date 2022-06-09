@@ -57,6 +57,12 @@ program haupt
 
   ! Deformationsmethode -- Rückwärtseinsetzen der Verschiebungen
 
+  call rueckwaerts
+
+  write(*,*) 'Hier sind die Randschnittkraefte'
+
+  write(*,*) Stabrandschnittkraftmatrix
+
   ! Deformationsmethode -- Übertragen der ausgerechneten Schnittreaktionen in die lokalen KOS
 
   ! Ausgeben der SKs und Auflagerreaktionen

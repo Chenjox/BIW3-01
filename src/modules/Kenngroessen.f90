@@ -19,6 +19,9 @@ module kenngroessen
     integer :: art                            !Art(Unstetigkeit)
   end type stab
 
+  ! IndexStab | Von:Qz,Nx,My | Zu: Qz,Nx,My
+  real*8, allocatable :: Stabrandschnittkraftmatrix(:,:)
+
   !type(stab) :: staebe(1:100)
   !-----------------------------------------------------------------------------
   !Deklarieren unserer Variablen

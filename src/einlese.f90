@@ -73,6 +73,7 @@ subroutine einlesen(pfad, FehlerNummer)
 !Einlesen der Stäbe in den Komplexen Datentypen
 ! ------------------------------------------------------------------------------
   allocate(staebe(ns))
+  allocate(Stabrandschnittkraftmatrix(ns,6))
   do i = 1, ns
     momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
     read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
