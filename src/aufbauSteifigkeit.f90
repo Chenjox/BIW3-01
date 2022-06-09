@@ -51,8 +51,8 @@ subroutine aufbauSystemsteifigkeitsmatrix
     end if
   end do
   write(unit=*, fmt=*) 'Hier kommt die Gesamtsteifigkeitsmatrix'
-  !read(*,*)
-  !call writeMatrix("K.TXT",Gesamtsteifigkeitsmatrix,(nk-nf)*3)
-  !read(*,*)
+  read(*,*)
+  call writeMatrix("K.TXT",Gesamtsteifigkeitsmatrix,(nk-nf)*3)
+  read(*,*)
 
 end subroutine aufbauSystemsteifigkeitsmatrix
