@@ -34,7 +34,9 @@ program haupt
   ! Dimension = AnzKnoten- AnzStützknoten = AnzfreieKnoten
   allocate(Gesamtsteifigkeitsmatrix((nk-nf)*3,(nk-nf)*3))  !Dimension
 
+  call aufbauSystemsteifigkeitsmatrix
 
+  read(*,*)
 
   ! Deformationsmethode -- Aufbau der Globalen Steifigkeitsmatrix
 
@@ -60,18 +62,18 @@ program haupt
 
 
 !Testabschnitt für transformation.f90
-  Stabsteifigkeitsmatrix=1
-  StabsteifigkeitGlobal=0
-
-  call transglobal(staebe(4)%alpha,Stabsteifigkeitsmatrix,StabsteifigkeitGlobal)
-
-  write(*,*) 'Alpha'
-  write(*,*)  staebe(4)%alpha
-  write(*,*) 'lokal'
-  write(*,*) Stabsteifigkeitsmatrix
-  write(*,*) 'global'
-  write(*,*) StabsteifigkeitGlobal
-  read(*,*)
+!  Stabsteifigkeitsmatrix=1
+!  StabsteifigkeitGlobal=0
+!
+!  call transglobal(staebe(4)%alpha,Stabsteifigkeitsmatrix,StabsteifigkeitGlobal)
+!
+!  write(*,*) 'Alpha'
+!  write(*,*)  staebe(4)%alpha
+!  write(*,*) 'lokal'
+!  write(*,*) Stabsteifigkeitsmatrix
+!  write(*,*) 'global'
+!  write(*,*) StabsteifigkeitGlobal
+!  read(*,*)
 !-------------------------------------
 
 end program haupt
