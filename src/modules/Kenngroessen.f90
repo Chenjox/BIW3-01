@@ -4,6 +4,8 @@ module kenngroessen
   implicit none
 
   real, allocatable :: Gesamtsteifigkeitsmatrix(:,:)
+  real, allocatable :: VektorKnotenlasten(:,:)
+  real, allocatable :: VektorKnotenverschiebungen(:,:)
 
 !-------------------------------------------------------------------------------
 !Belastungsmatrix
