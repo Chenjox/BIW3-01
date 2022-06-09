@@ -35,8 +35,8 @@ subroutine einlesen(pfad, FehlerNummer)
     stop "Anzahl der Steabe ist kleiner gleich 0!"
   end if
 
-  nk = ZahlenListe(1)                                       !Initialiseren von der Anzahl der Knoten
-  ns = ZahlenListe(2)                                       !Initialiseren von der Anzahl der Stäbe
+  nk = int(ZahlenListe(1))                                       !Initialiseren von der Anzahl der Knoten
+  ns = int(ZahlenListe(2))                                       !Initialiseren von der Anzahl der Stäbe
 
   momentaneZeile = ''                                       !ausleeren der momentaneZeile
   read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
@@ -46,7 +46,7 @@ subroutine einlesen(pfad, FehlerNummer)
     stop "Anzahl der Stützknoten ist kleiner gleich 0!"     !Fehlercode ausgabe
   end if
 
-  nf = ZahlenListe(1)                                       !Initialiseren von der Anzahl der Stäbe
+  nf = int(ZahlenListe(1))                                       !Initialiseren von der Anzahl der Stäbe
 
   momentaneZeile = ''                                       !ausleeren der momentaneZeile
   read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
@@ -56,7 +56,7 @@ subroutine einlesen(pfad, FehlerNummer)
     stop "E-Modul ist kleiner gleich 0!!"                   !Fehlercode ausgabe
   end if
 
-  E = ZahlenListe(1)                                        !Initialiseren vom E-Modul
+  E = real(ZahlenListe(1),8)                                        !Initialiseren vom E-Modul
 ! ------------------------------------------------------------------------------
 !Einlesen der Knoten und der Koordinaten der Knoten
 ! ------------------------------------------------------------------------------
@@ -65,8 +65,8 @@ subroutine einlesen(pfad, FehlerNummer)
     momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
     read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
     call ffread(momentaneZeile, ZahlenListe, Listenlaenge)    !Einlesen der nächsten Zeile
-    koordinatenmatrix(i,1) = ZahlenListe(1)                   !Initialiseren von x
-    koordinatenmatrix(i,2) = ZahlenListe(2)                   !Initialiseren von y
+    koordinatenmatrix(i,1) = real(ZahlenListe(1),8)                   !Initialiseren von x
+    koordinatenmatrix(i,2) = real(ZahlenListe(2),8)                   !Initialiseren von y
   enddo
 
 ! ------------------------------------------------------------------------------
@@ -77,14 +77,14 @@ subroutine einlesen(pfad, FehlerNummer)
     momentaneZeile = ''                                       !PURGE!!!! der momentaneZeile
     read(unit=20,fmt='(A255)') momentaneZeile                 !Einlesen
     call ffread(momentaneZeile, ZahlenListe, Listenlaenge)    !Einlesen der nächsten Zeile
-    staebe(i)%NrStab= ZahlenListe(1)
-    staebe(i)%K1= ZahlenListe(2)
-    staebe(i)%K2= ZahlenListe(3)
-    staebe(i)%A= ZahlenListe(4)
-    staebe(i)%I= ZahlenListe(5)
-    staebe(i)%alpha= ZahlenListe(6)
-    staebe(i)%art= ZahlenListe(7)
-    staebe(i)%E= E
+    staebe(i)%NrStab= int(ZahlenListe(1))
+    staebe(i)%K1=     int(ZahlenListe(2))
+    staebe(i)%K2=     int(ZahlenListe(3))
+    staebe(i)%A=      real(ZahlenListe(4),8)
+    staebe(i)%I=      real(ZahlenListe(5),8)
+    staebe(i)%alpha=  real(ZahlenListe(6),8)
+    staebe(i)%art=    int(ZahlenListe(7))
+    staebe(i)%E=      real(E,8)
   enddo
 
 ! ------------------------------------------------------------------------------
@@ -102,11 +102,11 @@ subroutine einlesen(pfad, FehlerNummer)
 
     if (ios.eq.0) then                                        !Abbruchkriterium End of File feststelen
       call ffread(momentaneZeile, ZahlenListe, Listenlaenge)    !Einlesen der nächsten Zeile
-      Belastungsmatrix(i,1) = ZahlenListe(1)                   !Initialiseren von Knotennummer
-      Belastungsmatrix(i,2) = ZahlenListe(2)                   !Initialiseren von ART
-      Belastungsmatrix(i,3) = ZahlenListe(3)                   !Initialiseren von P1/V1
-      Belastungsmatrix(i,4) = ZahlenListe(4)                   !Initialiseren von P2/V2
-      Belastungsmatrix(i,5) = ZahlenListe(5)                   !Initialiseren von M3/Phi
+      Belastungsmatrix(i,1) = real(ZahlenListe(1),8)                   !Initialiseren von Knotennummer
+      Belastungsmatrix(i,2) = real(ZahlenListe(2),8)                   !Initialiseren von ART
+      Belastungsmatrix(i,3) = real(ZahlenListe(3),8)                   !Initialiseren von P1/V1
+      Belastungsmatrix(i,4) = real(ZahlenListe(4),8)                   !Initialiseren von P2/V2
+      Belastungsmatrix(i,5) = real(ZahlenListe(5),8)                   !Initialiseren von M3/Phi
 
       AnzBelastung = AnzBelastung+1
     else

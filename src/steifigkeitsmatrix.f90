@@ -3,8 +3,8 @@ subroutine StabsteifigkeitLokalKIKI(Stabs, zuBefuellendeMatrix)
   use kenngroessen
   implicit none
   type(stab) :: Stabs
-  real, dimension(3,3) :: zuBefuellendeMatrix
-  real :: l
+  real*8, dimension(3,3) :: zuBefuellendeMatrix
+  real*8 :: l
 
   l=sqrt((koordinatenmatrix(Stabs%K2,1) - koordinatenmatrix(Stabs%K1,1))**2  &
         +(koordinatenmatrix(Stabs%K2,2) - koordinatenmatrix(Stabs%K1,2))**2)   !Stablängen bestimmen "Wurzel((x2-x1)^2-(y2-y1)^2)"

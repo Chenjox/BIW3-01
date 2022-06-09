@@ -1,8 +1,8 @@
 subroutine aufbauSystemsteifigkeitsmatrix
   use kenngroessen
   implicit none
-  real :: StabsteifigkeitLokal(3,3)
-  real :: StabsteifigkeitGlobal(3,3)
+  real*8 :: StabsteifigkeitLokal(3,3)
+  real*8 :: StabsteifigkeitGlobal(3,3)
   integer :: i
   integer :: currentK1, currentK2
 

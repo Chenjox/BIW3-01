@@ -7,10 +7,10 @@ use kenngroessen
 
 implicit none
 
-real alpha
-real, dimension(3,3):: T
-real, dimension(3,3), INTENT(IN):: matlokal
-real, dimension(3,3), INTENT(OUT):: matglobal
+real*8 alpha
+real*8, dimension(3,3):: T
+real*8, dimension(3,3), INTENT(IN):: matlokal
+real*8, dimension(3,3), INTENT(OUT):: matglobal
 
 
 !Transformationsmatrix aus Transformationswinkel erstellen
@@ -43,10 +43,10 @@ use kenngroessen
 
 implicit none
 
-real alpha
-real, dimension(3,3):: T
-real, dimension(3,3), INTENT(OUT):: matlokal
-real, dimension(3,3), INTENT(IN):: matglobal
+real*8 :: alpha
+real*8, dimension(3,3):: T
+real*8, dimension(3,3), INTENT(OUT):: matlokal
+real*8, dimension(3,3), INTENT(IN):: matglobal
 
 
 !Transformationsmatrix aus Transformationswinkel erstellen

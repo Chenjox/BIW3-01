@@ -45,6 +45,8 @@ program haupt
 
   call aufbauVektorknotenlasten
 
+  write(*,*) VektorKnotenlasten
+
   ! Deformationsmethode -- Aufbau des Vektors der Knotenverschiebungen
 
   ! Deformationsmethode -- Lösen des Gleichungssystems

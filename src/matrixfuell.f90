@@ -3,8 +3,8 @@
 ! Es wird ANGENOMMEN, dass die kleine Matrix eine 3x3 Matrix ist.
 subroutine fillIntoMatrix(gross, klein, groesseGross, spalteGross, zeileGross)
   implicit none
-  real, dimension(groesseGross,groesseGross), INTENT(OUT) :: gross
-  real, dimension(3,3), INTENT(IN) :: klein
+  real*8, dimension(groesseGross,groesseGross), INTENT(OUT) :: gross
+  real*8, dimension(3,3), INTENT(IN) :: klein
   integer, INTENT(IN) :: groesseGross
   integer, INTENT(IN) :: spalteGross
   integer, INTENT(IN) :: zeileGross
