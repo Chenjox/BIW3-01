@@ -127,7 +127,4 @@ subroutine aufbauVektorknotenverschiebungen
     end if
   end do
 
-  write(*,*) VektorRandschnittkraefte
-  read(*,*)
-
 end subroutine aufbauVektorknotenverschiebungen

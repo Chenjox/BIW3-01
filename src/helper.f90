@@ -34,11 +34,11 @@ subroutine writeMatrix(pfad, matrix, groesse)
   close(100)
 end subroutine writeMatrix
 
-function UnterMatrix(A,n,z,s)
+subroutine UnterMatrix(A,n,z,s,Unter)
   implicit none
   integer :: n,z,s ! groesse, zeile und spalte die weggelassen werden
-  real    :: A(n,n)
-  real   :: UnterMatrix(n-1,n-1)
+  real*8    :: A(n,n)
+  real*8   ,INTENT(OUT):: Unter(n-1,n-1)
   integer :: i,j
 
   zeilen: do i = 1, n
@@ -50,18 +50,34 @@ function UnterMatrix(A,n,z,s)
         cycle spalten
       else if ( j.gt.s ) then ! Ist j größer als s dann müssen wir immer eins von j abziehen
         if(i.gt.z) then
-          UnterMatrix(i-1,j-1) = A(i,j) !wevon j>s und i>z von beiden 1 abziehen
+          Unter(i-1,j-1) = A(i,j) !wevon j>s und i>z von beiden 1 abziehen
         else
-          UnterMatrix(i,j-1) = A(i,j) !wenn nur j>s nur von j (spalten) 1 abziehen
+          Unter(i,j-1) = A(i,j) !wenn nur j>s nur von j (spalten) 1 abziehen
         end if
       else ! j ist kleiner als s
         if(i.gt.z) then
-          UnterMatrix(i-1,j) = A(i,j) !wenn nur i>z nur von i (zeilen) 1 abziehen
+          Unter(i-1,j) = A(i,j) !wenn nur i>z nur von i (zeilen) 1 abziehen
         else
-          UnterMatrix(i,j) = A(i,j)
+          Unter(i,j) = A(i,j)
         end if ! wenn beides kleiner oder gleich nichts abziehen
       end if
     end do spalten
   end do zeilen
 
-end function UnterMatrix
+end subroutine UnterMatrix
+
+subroutine UnterVektor(v,n,z,Unter)
+  implicit none
+  integer :: n,z ! groesse, zeile und spalte die weggelassen werden
+  real*8    :: v(n)
+  real*8   ,INTENT(OUT):: Unter(n-1)
+  integer :: i,j
+
+  do i = 1, n-1
+    if(i.lt.z) then
+      Unter(i) = v(i)
+    else
+      Unter(i) = v(i+1)
+    end if
+  end do
+end subroutine UnterVektor

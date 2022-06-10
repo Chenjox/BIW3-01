@@ -34,10 +34,8 @@ module kenngroessen
   real*8, allocatable :: Gesamtsteifigkeitsmatrix(:,:)
   real*8, allocatable :: VektorKnotenlasten(:)
   real*8, allocatable :: VektorRandschnittkraefte(:)
-  
-  real*8, allocatable :: GesamtsteifigkeitsmatrixMitStreichungen(:,:)
-  real*8, allocatable :: VektorKnotenlastenMitStreichungen(:)
-  real*8, allocatable :: VektorKnotenverschiebungenMitStreichungen(:)
+
+
 
   real*8, allocatable :: VektorKnotenverschiebungen(:)
 
