@@ -29,8 +29,6 @@ program haupt
 
   end do
 
-  read(*,*)
-
   ! Dimension = AnzKnoten- AnzStützknoten = AnzfreieKnoten
   allocate(Gesamtsteifigkeitsmatrix((nk-nf)*3,(nk-nf)*3))  !Dimension
   allocate(VektorKnotenlasten((nk-nf)*3))
@@ -40,13 +38,9 @@ program haupt
   ! Deformationsmethode -- Aufbau der Globalen Steifigkeitsmatrix
   call aufbauSystemsteifigkeitsmatrix
 
-  read(*,*)
-
   ! Deformationsmethode -- Aufbau des Vektors der Knotenlasten
 
   call aufbauVektorknotenlasten
-
-  write(*,*) VektorKnotenlasten
 
   ! Deformationsmethode -- Aufbau des Vektors der Knotenverschiebungen
 

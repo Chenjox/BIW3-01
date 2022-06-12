@@ -50,9 +50,9 @@ subroutine aufbauVektorknotenverschiebungen
           stabindex = stabindex+1
         end if
       end do
-      write(*,*) 'Angeschlossene Staebe sind'
-      write(*,*) stabindezes
-      read(*,*)
+      !write(*,*) 'Angeschlossene Staebe sind'
+      !write(*,*) stabindezes
+      !read(*,*)
       ! Jetzt gehen wir durch alle Angeschlossenen Stäbe durch und holen uns die Matrizen
 
       do j = 1,stabanzahl

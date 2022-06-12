@@ -19,7 +19,7 @@ end subroutine printMatrix
 subroutine writeMatrix(pfad, matrix, groesse)
   implicit none
   integer, INTENT(IN) :: groesse
-  real, dimension(groesse,groesse), INTENT(IN) :: matrix
+  real*8, dimension(groesse,groesse), INTENT(IN) :: matrix
   integer :: i,j
   character(len=5) :: pfad
   character(len=15) :: formatString
@@ -81,3 +81,85 @@ subroutine UnterVektor(v,n,z,Unter)
     end if
   end do
 end subroutine UnterVektor
+
+subroutine StreichVektor(V,n,streich, streichAnzahl, K)
+  implicit none
+  integer ,INTENT(IN):: n, streichAnzahl
+  integer ,INTENT(IN):: streich(streichAnzahl)
+  real*8  ,INTENT(IN):: V(n)
+  real*8, INTENT(OUT) :: K(n-streichAnzahl)
+  integer :: i,g
+  integer :: gestrichenI ! Anzahl der bereits gestrichenen Zeilen
+
+  gestrichenI = 0
+  K = 0.0
+
+  do i = 1, n - streichAnzahl
+    do g = 1, streichAnzahl
+      if ( (i+gestrichenI).eq.streich(g) ) then
+        gestrichenI = gestrichenI + 1
+      end if
+    end do
+    K(i) = V(i + gestrichenI)
+  end do
+
+end subroutine StreichVektor
+
+! Umkehrfunktion von StreichVektor
+subroutine InsertVektor(V,n,hinzu,hinzuAnzahl, K)
+  integer ,INTENT(IN):: n, hinzuAnzahl
+  integer ,INTENT(IN):: hinzu(hinzuAnzahl)
+  real*8  ,INTENT(IN):: V(n-hinzuAnzahl)
+  real*8, INTENT(OUT) :: K(n)
+  integer :: i,g
+  integer :: hinzuI ! Anzahl der bereits gestrichenen Zeilen
+
+  hinzuI = 0
+  K = 0.0
+
+  do i = 1, n
+    do g = 1, hinzuAnzahl
+      if ( (i+gestrichenI).eq.hinzu(g) ) then
+        hinzuI = hinzuI + 1
+      end if
+    end do
+    K(i) = V(i - hinzuI)
+  end do
+  ! Die hinzugefügten einträge sind mit 0.0 gefüllt
+end subroutine InsertVektor
+
+subroutine StreichMatrix(M, n, streich, streichAnzahl,K)
+  implicit none
+  integer ,INTENT(IN):: n, streichAnzahl
+  integer ,INTENT(IN):: streich(streichAnzahl)
+  real*8  ,INTENT(IN):: M(n,n)
+  real*8, INTENT(OUT) :: K(n-streichAnzahl,n-streichAnzahl)
+  integer :: i,j,g
+  integer :: gestrichenI,gestrichenJ ! Anzahl der bereits gestrichenen Zeilen/Spalten
+
+  gestrichenI = 0
+  gestrichenJ = 0
+  K = 0.0
+
+
+  ! Wie bestimmen wir ob eine Zeile/Spalte gestrichen werden muss?
+  ! Richtig, wir lesen jedes mal streich durch.
+
+  do i = 1, n-streichAnzahl
+    do g = 1, streichAnzahl
+      if((i+gestrichenI).eq.streich(g)) then
+        gestrichenI = gestrichenI + 1
+      end if
+    end do
+    do j = 1, n-streichAnzahl
+      do g = 1, streichAnzahl
+        if((j+gestrichenJ).eq.streich(g)) then
+          gestrichenJ = gestrichenJ + 1
+        end if
+      end do
+      K(i, j) = M(i + gestrichenI, j + gestrichenJ)
+    end do
+    gestrichenJ = 0
+  end do
+
+end subroutine StreichMatrix

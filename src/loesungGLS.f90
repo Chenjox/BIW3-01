@@ -14,7 +14,7 @@ subroutine lousungGLS
 
   integer :: NMatrix1, NMatrix2, NVektor1, NVektor2
 
-  integer             :: i,j
+  integer             :: i,j,k
   integer             :: AnzahlStreichungen
   integer, allocatable:: OrteStreichungen(:)
 
@@ -54,14 +54,49 @@ subroutine lousungGLS
   !end if
   !TODO Streichungsalgorithmus implementieren
 
+  allocate(VektorKnotenlastenMitStreichungen((nk-nf)*3-AnzahlStreichungen))
+  allocate(VektorRandschnittkraefteMitStreichungen((nk-nf)*3-AnzahlStreichungen))
+  allocate(VektorKnotenverschiebungenMitStreichungen((nk-nf)*3-AnzahlStreichungen))
+  allocate(GesamtsteifigkeitsmatrixMitStreichungen((nk-nf)*3-AnzahlStreichungen,(nk-nf)*3-AnzahlStreichungen))
+
+  VektorKnotenverschiebungenMitStreichungen = 0.0
+
+  call StreichVektor(VektorKnotenlasten, (nk-nf)*3, OrteStreichungen, &
+        AnzahlStreichungen, VektorKnotenlastenMitStreichungen)
+  call StreichVektor(VektorRandschnittkraefte, (nk-nf)*3, OrteStreichungen, &
+        AnzahlStreichungen, VektorRandschnittkraefteMitStreichungen)
+  call StreichMatrix(Gesamtsteifigkeitsmatrix, (nk-nf)*3, OrteStreichungen, &
+        AnzahlStreichungen, GesamtsteifigkeitsmatrixMitStreichungen)
+
 
 
 
   VektorKnotenverschiebungen = 0
 
-  write(unit=*, fmt=*) 'Jetzt wird das GLS gelöst.'
+  !write(unit=*, fmt=*) 'Jetzt wird das GLS gelöst.'
 
-  call gausz((nk-nf)*3,Gesamtsteifigkeitsmatrix, &
-            VektorKnotenlasten-VektorRandschnittkraefte,VektorKnotenverschiebungen)
+  call gausz((nk-nf)*3-AnzahlStreichungen,GesamtsteifigkeitsmatrixMitStreichungen, &
+            VektorKnotenlastenMitStreichungen-VektorRandschnittkraefteMitStreichungen, &
+            VektorKnotenverschiebungenMitStreichungen)
+
+  ! Rückwärtseinsetzen -> Vektor der Knotenverschiebungen muss zurück gebastelt werden.
+
+  VektorKnotenverschiebungen = 0.0
+
+  call InsertVektor(VektorKnotenverschiebungenMitStreichungen, (nk-nf)*3, OrteStreichungen, &
+        AnzahlStreichungen, VektorKnotenverschiebungen)
+
+  do i = 1, 20
+    if(int(Belastungsmatrix(i,1)).eq.0) then
+      exit
+    else if(int(Belastungsmatrix(i,2)).eq.1) then
+      VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2))   = &
+        VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2))   + Belastungsmatrix(i,3)
+      VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+1) = &
+        VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+1) + Belastungsmatrix(i,4)
+      VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+2) = &
+        VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+2) + Belastungsmatrix(i,5)
+    end if
+  end do
 
 end subroutine lousungGLS
