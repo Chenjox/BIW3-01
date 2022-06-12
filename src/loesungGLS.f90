@@ -90,12 +90,12 @@ subroutine lousungGLS
     if(int(Belastungsmatrix(i,1)).eq.0) then
       exit
     else if(int(Belastungsmatrix(i,2)).eq.1) then
-      VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2))   = &
-        VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2))   + Belastungsmatrix(i,3)
-      VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+1) = &
-        VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+1) + Belastungsmatrix(i,4)
-      VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+2) = &
-        VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+2) + Belastungsmatrix(i,5)
+      do k = 0,2
+        if ( Belastungsmatrix(i,3+k).ne.0.0 ) then
+          VektorKnotenverschiebungen((int(Belastungsmatrix(i,1))*3-2)+k) &
+            = Belastungsmatrix(i,3+k)
+        end if
+      end do
     end if
   end do
 
